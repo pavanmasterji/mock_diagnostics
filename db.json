@@ -1,11 +1,36 @@
 {
-    "posts": [
-      {
-        "id": 1,
-        "title": "hello"
-      }
-    ],
-    "profile": {
-      "name": "typicode"
+  "users": [
+    {
+      "id": "1",
+      "name": "pavan",
+      "email": "pavan@masterji.ai",
+      "mobile": "8147317832",
+      "password": "password",
+      "token": "wqer1234asdfeqrwe2345",
+      "is_active": true
     }
-  }
+  ],
+  "mcq": [
+    {
+      "id": "",
+      "question": "",
+      "option1": "",
+      "option2": "",
+      "option3": "",
+      "option4": "",
+      "correct_option": "",
+      "competency": 5,
+      "is_active": true
+    }
+  ],
+  "diagnosis": [
+    {
+      "id": "",
+      "user_id": "",
+      "percentage": "",
+      "target_percentage": "",
+      "competency": [1,3],
+      "test_score": 0
+    }
+  ]
+}

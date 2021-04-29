@@ -55,6 +55,32 @@ app.get('/api/v1/users/:id', function (req, res) {
         util.reserror(res, error)
     }
 })
+
+app.get('/api/v1/users/:email&:password', function (req, res) {
+    try {
+        db.users.find({ email: req.params.email,password: req.params.password }, function (err, users) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, users)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+
+app.get('/api/v1/users/:mobile', function (req, res) {
+    try {
+        let present = db.users.find({ mobile: req.params.mobile});
+        // console.log("it is there"+present);
+        db.users.find({ mobile: req.params.mobile}, function (err, users) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, users)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+
+
 app.post('/api/v1/users', function (req, res) {
     try {
         db.users.insert(req.body, function (err, users) {

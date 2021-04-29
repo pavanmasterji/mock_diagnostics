@@ -69,8 +69,6 @@ app.get('/api/v1/users/:email&:password', function (req, res) {
 
 app.get('/api/v1/users/:mobile', function (req, res) {
     try {
-        let present = db.users.find({ mobile: req.params.mobile});
-        // console.log("it is there"+present);
         db.users.find({ mobile: req.params.mobile}, function (err, users) {
             if (err) util.reserror(res, err)
             util.ressuccess(res, users)

@@ -96,6 +96,202 @@ app.delete('/api/v1/users/:id', function (req, res) {
 })
 /////////////////////////////////////
 
+/////////////////////////////////////
+// mcq apis
+app.get('/api/v1/mcq', function (req, res) {
+    try {
+        console.log(req.query);
+        db.mcq.find(req.query, function (err, mcq) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, mcq)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.get('/api/v1/mcq/:id', function (req, res) {
+    try {
+        db.mcq.find({ id: req.params.id }, function (err, mcq) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, mcq)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.post('/api/v1/mcq', function (req, res) {
+    try {
+        let requiredMcqObj = {
+            "id":"",
+            "question":"",
+            "option_1":"",
+            "option_2":"",
+            "option_3":"",
+            "option_4":"",
+            "competency":"",
+            "active":"",
+            "correct_answer":""
+        }
+        requiredMcqObj.id = req.body.id;
+        requiredMcqObj.question = req.body.question;
+        requiredMcqObj.option_1 = req.body.option_1;
+        requiredMcqObj.option_2 = req.body.option_2;
+        requiredMcqObj.option_3 = req.body.option_3;
+        requiredMcqObj.option_4 = req.body.option_4;
+        requiredMcqObj.competency = req.body.competency;
+        requiredMcqObj.active = req.body.active;
+        requiredMcqObj.correct_answer = req.body.correct_answer;
+
+        console.log(requiredMcqObj);        
+        db.mcq.insert(requiredMcqObj, function (err, mcq) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, mcq)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.put('/api/v1/mcq/:id', function (req, res) {
+    try {
+        let updateMcqObj = {
+            "question":"",
+            "option_1":"",
+            "option_2":"",
+            "option_3":"",
+            "option_4":"",
+            "competency":"",
+            "active":"",
+            "correct_answer":""
+        }
+       
+        updateMcqObj.question = req.body.question;
+        updateMcqObj.option_1 = req.body.option_1;
+        updateMcqObj.option_2 = req.body.option_2;
+        updateMcqObj.option_3 = req.body.option_3;
+        updateMcqObj.option_4 = req.body.option_4;
+        updateMcqObj.competency = req.body.competency;
+        updateMcqObj.active = req.body.active;
+        updateMcqObj.correct_answer = req.body.correct_answer;
+
+        db.mcq.update({ id: req.params.id }, updateMcqObj, {}, function (err, mcq) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, mcq)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.delete('/api/v1/mcq/:id', function (req, res) {
+    try {
+        db.mcq.update({ id: req.params.id }, { multi: false }, function (err, mcq) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, mcq)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+/////////////////////////////////////
+
+/////////////////////////////////////
+// diagnosis apis
+app.get('/api/v1/diagnosis', function (req, res) {
+    try {
+        console.log(req.query);
+        db.diagnosis.find(req.query, function (err, diagnosis) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, diagnosis)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.get('/api/v1/diagnosis/:id', function (req, res) {
+    try {
+        db.diagnosis.find({ id: req.params.id }, function (err, diagnosis) {
+            if (err) util.reserror(res, err)
+            util.ressuccess(res, diagnosis)
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.post('/api/v1/diagnosis', function (req, res) {
+    try {
+        let addDiagnosisObj = {
+            "id":"",
+            "user_id":"",
+            "previous_percentage":"",
+            "required_percentage":"",
+            "competency":""
+        }
+        addDiagnosisObj.id = req.body.id;
+        addDiagnosisObj.user_id = req.body.user_id;
+        addDiagnosisObj.previous_percentage = req.body.previous_percentage;
+        addDiagnosisObj.required_percentage = req.body.required_percentage;
+        addDiagnosisObj.competency = req.body.competency;
+
+       
+        db.diagnosis.insert(addDiagnosisObj, function (err, diagnosis) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, diagnosis)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.put('/api/v1/diagnosis/:id', function (req, res) {
+    try {
+        let updateDiagnosisObj = {
+            "user_id":"",
+            "previous_percentage":"",
+            "required_percentage":"",
+            "competency":""
+        }
+       
+        updateDiagnosisObj.user_id = req.body.user_id;
+        updateDiagnosisObj.previous_percentage = req.body.previous_percentage;
+        updateDiagnosisObj.required_percentage = req.body.required_percentage;
+        updateDiagnosisObj.competency = req.body.competency;
+
+        db.diagnosis.update({ id: req.params.id }, updateDiagnosisObj, {}, function (err, diagnosis) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, diagnosis)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+app.delete('/api/v1/diagnosis/:id', function (req, res) {
+    try {
+        db.diagnosis.update({ id: req.params.id }, { multi: false }, function (err, diagnosis) {
+            if (err) {
+                util.reserror(res, err)
+            } else {
+                util.ressuccess(res, diagnosis)
+            }
+        })
+    } catch (error) {
+        util.reserror(res, error)
+    }
+})
+/////////////////////////////////////
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })

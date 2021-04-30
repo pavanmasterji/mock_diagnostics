@@ -149,6 +149,7 @@ app.post('/api/v1/mcq', function (req, res) {
 app.put('/api/v1/mcq/:id', function (req, res) {
     try {
         let updateMcqObj = {
+            "id":req.params.id,
             "question":req.body.question,
             "option_1":req.body.option_1,
             "option_2":req.body.option_2,
@@ -232,6 +233,7 @@ app.post('/api/v1/diagnosis', function (req, res) {
 app.put('/api/v1/diagnosis/:id', function (req, res) {
     try {
         let updateDiagnosisObj = {
+            "id":req.params.id,
             "user_id":req.body.user_id,
             "previous_percentage":req.body.previous_percentage,
             "required_percentage":req.body.previous_percentage,

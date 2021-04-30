@@ -56,28 +56,6 @@ app.get('/api/v1/users/:id', function (req, res) {
     }
 })
 
-app.get('/api/v1/users/:email&:password', function (req, res) {
-    try {
-        db.users.find({ email: req.params.email,password: req.params.password }, function (err, users) {
-            if (err) util.reserror(res, err)
-            util.ressuccess(res, users)
-        })
-    } catch (error) {
-        util.reserror(res, error)
-    }
-})
-
-app.get('/api/v1/users/:mobile', function (req, res) {
-    try {
-        db.users.find({ mobile: req.params.mobile}, function (err, users) {
-            if (err) util.reserror(res, err)
-            util.ressuccess(res, users)
-        })
-    } catch (error) {
-        util.reserror(res, error)
-    }
-})
-
 
 app.post('/api/v1/users', function (req, res) {
     try {
@@ -146,27 +124,17 @@ app.get('/api/v1/mcq/:id', function (req, res) {
 app.post('/api/v1/mcq', function (req, res) {
     try {
         let requiredMcqObj = {
-            "id":"",
-            "question":"",
-            "option_1":"",
-            "option_2":"",
-            "option_3":"",
-            "option_4":"",
-            "competency":"",
-            "active":"",
-            "correct_answer":""
+            "id":req.body.id,
+            "question":req.body.question,
+            "option_1":req.body.option_1,
+            "option_2":req.body.option_2,
+            "option_3":req.body.option_3,
+            "option_4":req.body.option_4,
+            "competency":req.body.competency,
+            "active":req.body.active,
+            "correct_answer":req.body.correct_answer
         }
-        requiredMcqObj.id = req.body.id;
-        requiredMcqObj.question = req.body.question;
-        requiredMcqObj.option_1 = req.body.option_1;
-        requiredMcqObj.option_2 = req.body.option_2;
-        requiredMcqObj.option_3 = req.body.option_3;
-        requiredMcqObj.option_4 = req.body.option_4;
-        requiredMcqObj.competency = req.body.competency;
-        requiredMcqObj.active = req.body.active;
-        requiredMcqObj.correct_answer = req.body.correct_answer;
-
-        console.log(requiredMcqObj);        
+               
         db.mcq.insert(requiredMcqObj, function (err, mcq) {
             if (err) {
                 util.reserror(res, err)
@@ -181,25 +149,16 @@ app.post('/api/v1/mcq', function (req, res) {
 app.put('/api/v1/mcq/:id', function (req, res) {
     try {
         let updateMcqObj = {
-            "question":"",
-            "option_1":"",
-            "option_2":"",
-            "option_3":"",
-            "option_4":"",
-            "competency":"",
-            "active":"",
-            "correct_answer":""
+            "question":req.body.question,
+            "option_1":req.body.option_1,
+            "option_2":req.body.option_2,
+            "option_3":req.body.option_3,
+            "option_4":req.body.option_4,
+            "competency":req.body.competency,
+            "active":req.body.active,
+            "correct_answer":req.body.correct_answer
         }
        
-        updateMcqObj.question = req.body.question;
-        updateMcqObj.option_1 = req.body.option_1;
-        updateMcqObj.option_2 = req.body.option_2;
-        updateMcqObj.option_3 = req.body.option_3;
-        updateMcqObj.option_4 = req.body.option_4;
-        updateMcqObj.competency = req.body.competency;
-        updateMcqObj.active = req.body.active;
-        updateMcqObj.correct_answer = req.body.correct_answer;
-
         db.mcq.update({ id: req.params.id }, updateMcqObj, {}, function (err, mcq) {
             if (err) {
                 util.reserror(res, err)
@@ -252,18 +211,12 @@ app.get('/api/v1/diagnosis/:id', function (req, res) {
 app.post('/api/v1/diagnosis', function (req, res) {
     try {
         let addDiagnosisObj = {
-            "id":"",
-            "user_id":"",
-            "previous_percentage":"",
-            "required_percentage":"",
-            "competency":""
+            "id":req.body.id,
+            "user_id":req.body.user_id,
+            "previous_percentage":req.body.previous_percentage,
+            "required_percentage":req.body.required_percentage,
+            "competency":req.body.competency
         }
-        addDiagnosisObj.id = req.body.id;
-        addDiagnosisObj.user_id = req.body.user_id;
-        addDiagnosisObj.previous_percentage = req.body.previous_percentage;
-        addDiagnosisObj.required_percentage = req.body.required_percentage;
-        addDiagnosisObj.competency = req.body.competency;
-
        
         db.diagnosis.insert(addDiagnosisObj, function (err, diagnosis) {
             if (err) {
@@ -279,16 +232,11 @@ app.post('/api/v1/diagnosis', function (req, res) {
 app.put('/api/v1/diagnosis/:id', function (req, res) {
     try {
         let updateDiagnosisObj = {
-            "user_id":"",
-            "previous_percentage":"",
-            "required_percentage":"",
-            "competency":""
+            "user_id":req.body.user_id,
+            "previous_percentage":req.body.previous_percentage,
+            "required_percentage":req.body.previous_percentage,
+            "competency":req.body.competency
         }
-       
-        updateDiagnosisObj.user_id = req.body.user_id;
-        updateDiagnosisObj.previous_percentage = req.body.previous_percentage;
-        updateDiagnosisObj.required_percentage = req.body.required_percentage;
-        updateDiagnosisObj.competency = req.body.competency;
 
         db.diagnosis.update({ id: req.params.id }, updateDiagnosisObj, {}, function (err, diagnosis) {
             if (err) {

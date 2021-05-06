@@ -7,6 +7,7 @@ app.use('/diagnosis', require('./diagnosis'))
 app.use('/boards', require('./boards'))
 app.use('/standards', require('./standards'))
 app.use('/subjects', require('./subjects'))
+app.use('/chapters', require('./chapters'))
 
 
 module.exports = app

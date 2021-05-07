@@ -8,6 +8,7 @@ app.use('/boards', require('./boards'))
 app.use('/standards', require('./standards'))
 app.use('/subjects', require('./subjects'))
 app.use('/chapters', require('./chapters'))
+app.use('/topics', require('./topics'))
 
 
 module.exports = app
